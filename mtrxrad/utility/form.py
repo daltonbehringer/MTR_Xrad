@@ -17,7 +17,7 @@ def format_data(
         nc = Dataset(f, 'r')
 
         # scan_time = nc.variables['Time'][:][0]
-        scan_time = file[-32:-26]
+        scan_time = f[-32:-26]
 
         if radvar == 'BR':
                 data = nc.variables['Reflectivity'][:]
@@ -43,10 +43,10 @@ def format_data(
         elev = np.round(nc.variables['Elevation'][:][1], decimals=0)
         lat = nc.Latitude
         lon = nc.Longitude
-        gw = nc.variables['GateWidth'][:]
+        gw = nc.variables['GateWidth'][:]/1000
         #gw = gw/1000
         az = nc.variables['Azimuth'][:]
-        fg = nc.variables['StartRange'][:]
+        fg = nc.variables['StartRange'][:]/1000
         fg = (fg*-1)
 
         gates = np.arange(1, data.shape[1]+1)
