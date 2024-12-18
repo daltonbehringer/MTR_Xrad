@@ -16,7 +16,8 @@ def format_data(
 
         nc = Dataset(f, 'r')
 
-        scan_time = nc.variables['Time'][:]
+        # scan_time = nc.variables['Time'][:][0]
+        scan_time = file[-32:-26]
 
         if radvar == 'BR':
                 data = nc.variables['Reflectivity'][:]
