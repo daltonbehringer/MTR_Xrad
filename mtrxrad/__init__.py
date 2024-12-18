@@ -1,3 +1,3 @@
 ###initialization file###
-from .plot import ppi
+from .plot.ppi import plot_ppi
 from .utility import form

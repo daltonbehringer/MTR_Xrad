@@ -10,45 +10,42 @@ from netCDF4 import Dataset
 # var = 'BR'
 
 def format_data(
-        fdir,
-        fname,
-        var
+        f,
+        radvar
         ):
 
-        # for filename in glob.glob('aqpi*PPI.netcdf*'):
-        f = fdir + fname
         nc = Dataset(f, 'r')
 
-        scan_time = nc.time_coverage_end
+        scan_time = nc.variables['Time'][:]
 
-        if var == 'BR':
-                data = nc.variables['CorrReflectivity'][:]
+        if radvar == 'BR':
+                data = nc.variables['Reflectivity'][:]
                 data[data < -10.] = np.nan
                 data = np.ma.array(data, mask=np.isnan(data))
-        if var == 'ZDR':
-                data = nc.variables['CorrDifferentialReflectivity'][:]
+        if radvar == 'ZDR':
+                data = nc.variables['DifferentialReflectivity'][:]
                 data[data < -8.] = np.nan
                 data = np.ma.array(data, mask=np.isnan(data))
-        if var == 'CC':
+        if radvar == 'CC':
                 data = nc.variables['CrossPolCorrelation'][:]
                 data[data < 0.] = np.nan
                 data = np.ma.array(data, mask=np.isnan(data))
-        if var == 'KDP':
-                data = nc.variables['KDP'][:]
+        if radvar == 'KDP':
+                data = nc.variables['SpecificPhase'][:]
                 data[data <-2.] = np.nan
                 data = np.ma.array(data, mask=np.isnan(data))
-        if var == 'BV':
+        if radvar == 'BV':
                 data = nc.variables['Velocity'][:]
                 data[data < -99.] = np.nan
                 data = np.ma.array(data, mask=np.isnan(data))
 
-        elev = np.round(nc.variables['elevation'][:][1], decimals=0)
+        elev = np.round(nc.variables['Elevation'][:][1], decimals=0)
         lat = nc.variables['latitude'][:]
         lon = nc.variables['longitude'][:]
-        gw = nc.variables['gateWidth'][:]
+        gw = nc.variables['GateWidth'][:]
         #gw = gw/1000
-        az = nc.variables['azimuth'][:]
-        fg = nc.variables['startRange'][:]
+        az = nc.variables['Azimuth'][:]
+        fg = nc.variables['StartRange'][:]
         fg = (fg*-1)
 
         gates = np.arange(1, data.shape[1]+1)
