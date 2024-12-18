@@ -7,6 +7,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import matplotlib.colors as colors
+from matplotlib import colormaps
 import cartopy.crs as ccrs
 import pyproj
 import glob
@@ -65,7 +66,7 @@ def plot_ppi(
 		mesh = ax.pcolormesh(lon, lat, data, vmin=-8, vmax=8, cmap=cmap,
 	                     linewidth=0.000001, edgecolors='face', transform=ccrs.PlateCarree())
 	if radvar == 'CC':
-		cmap = ctables.registry.get_colortable('rainbow')
+		cmap = colormaps['gist_ncar']
 		mesh = ax.pcolormesh(lon, lat, data, vmin=0, vmax=1, cmap=cmap,
 	                     linewidth=0.000001, edgecolors='face', transform=ccrs.PlateCarree())
 	if radvar == 'KDP':

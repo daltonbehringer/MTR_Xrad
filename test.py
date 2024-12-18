@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 import glob
 
 
-fdir = '/Users/daltonbehringer/MTR_data/xband/XSCZ/sv_tor_dec2024/2deg/'
-fname = 'AQPI_outbound.scrz-20241214-214043_226773_21_2_PPI_qc.netcdf'
-radvar = 'BV'
+fdir = '/Users/daltonbehringer/MTR_data/xband/XSCZ/sv_tor_dec2024/3deg/'
+# fname = 'AQPI_outbound.scrz-20241214-214043_226773_21_3_PPI_qc.netcdf'
+radvar = 'CC'
 
-f = fdir + fname
+# f = fdir + fname
 
 for name in glob.glob(fdir + 'AQPI_outbound.scrz*'):
 		mtrxrad.plot_ppi(name, radvar)
