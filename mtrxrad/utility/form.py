@@ -40,8 +40,8 @@ def format_data(
                 data = np.ma.array(data, mask=np.isnan(data))
 
         elev = np.round(nc.variables['Elevation'][:][1], decimals=0)
-        lat = nc.variables['latitude'][:]
-        lon = nc.variables['longitude'][:]
+        lat = nc.Latitude
+        lon = nc.Longitude
         gw = nc.variables['GateWidth'][:]
         #gw = gw/1000
         az = nc.variables['Azimuth'][:]
